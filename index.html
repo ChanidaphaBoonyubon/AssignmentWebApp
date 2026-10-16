@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fairy Drone Dashboard</title>
+    <!-- ลิงก์ไปยังไฟล์ CSS สำหรับตกแต่งหน้าเว็บ -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- แถบเมนูด้านบน (Navigation Bar) -->
+    <header class="navbar">
+        <div class="logo-box" onclick="showTab('home')">
+            <!-- ใส่รูปโลโก้ของคุณที่นี่ (ระบบ CSS จะช่วยลบพื้นหลังขาวให้อัตโนมัติ) -->
+            <img id="logo-image" src="logo.png" alt="Fairy Logo" onerror="this.src='https://placehold.co/150x50/ffffff/c25e8a?text=Fairy+Logo'">
+        </div>
+        <nav class="nav-links">
+            <button onclick="showTab('home')" id="btn-home" class="nav-btn active">Home</button>
+            <button onclick="showTab('config')" id="btn-config" class="nav-btn">View Config</button>
+            <button onclick="showTab('log-form')" id="btn-log-form" class="nav-btn">Record Temp</button>
+            <button onclick="showTab('logs')" id="btn-logs" class="nav-btn">View Logs</button>
+        </nav>
+    </header>
+
+    <!-- พื้นที่แสดงเนื้อหาหลัก -->
+    <main>
+        
+        <!-- ส่วนที่ 1: หน้าหลัก (HOME PAGE) -->
+        <section id="sec-home" class="tab-content">
+            <div class="hero-banner">
+                <h1>Welcome to Fairy Kingdom</h1>
+                <p>Manage your drone fleet, track temperatures, and view logs.</p>
+            </div>
+
+            <div class="card-grid">
+                <div class="menu-card" onclick="showTab('config')">
+                    <h3>Fleet Config</h3>
+                    <p>View drone profiles</p>
+                </div>
+                <div class="menu-card" onclick="showTab('log-form')">
+                    <h3>Record Temp</h3>
+                    <p>Log new temperature data</p>
+                </div>
+                <div class="menu-card" onclick="showTab('logs')">
+                    <h3>System Logs</h3>
+                    <p>Review historical records</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนที่ 2: หน้าแสดงโปรไฟล์โดรน (VIEW CONFIG PAGE) -->
+        <section id="sec-config" class="tab-content hidden">
+            <h2 class="section-title">Drone Fleet Profiles</h2>
+            <div id="config-container" class="drone-grid">
+                <!-- ข้อมูลการ์ดโดรนจะถูกดึงมาใส่ตรงนี้ด้วย script.js -->
+            </div>
+        </section>
+
+        <!-- ส่วนที่ 3: หน้าฟอร์มบันทึกอุณหภูมิ (RECORD TEMP FORM PAGE) -->
+        <section id="sec-log-form" class="tab-content hidden">
+            <div class="form-card">
+                <h2>Record Temperature</h2>
+                <p>Update temperature status for assigned drone.</p>
+                
+                <form onsubmit="submitTemperature(event)">
+                    <div class="input-group">
+                        <input type="number" step="0.1" id="temp-input" placeholder="e.g. 24.5" required>
+                        <span class="unit">°C</span>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit Data</button>
+                </form>
+
+                <div id="success-msg" class="success-msg hidden">
+                    Data logged successfully!
+                </div>
+            </div>
+        </section>
+
+        <!-- ส่วนที่ 4: หน้าแสดงตารางประวัติ (VIEW LOGS PAGE) -->
+        <section id="sec-logs" class="tab-content hidden">
+            <div class="table-card">
+                <div class="table-header">
+                    <h2>System Logs</h2>
+                    <button onclick="loadLogs()" class="refresh-btn">Refresh Data</button>
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Created (Time)</th>
+                                <th>Country</th>
+                                <th>Drone ID</th>
+                                <th>Drone Name</th>
+                                <th>Celsius (°C)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="logs-tbody">
+                            <!-- แถวข้อมูลตารางจะถูกดึงมาใส่ตรงนี้ด้วย script.js -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ลิงก์ไปยังไฟล์ JavaScript สำหรับทำงานและควบคุมหน้าเว็บ -->
+    <script src="script.js"></script>
+</body>
+</html>

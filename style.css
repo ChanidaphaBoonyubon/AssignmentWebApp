@@ -1,0 +1,316 @@
+/* STREAMING_CHUNK:Setting up Global Styles... /
+/ รีเซ็ทค่าเริ่มต้นของเบราว์เซอร์ */
+
+{
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+background-color: #fdf4f9;
+color: #5a324d;
+padding-bottom: 40px;
+}
+
+/* คลาสสำหรับซ่อนองค์ประกอบที่ไม่ต้องการแสดง */
+.hidden {
+display: none !important;
+}
+
+/* STREAMING_CHUNK:Styling Navigation Bar... /
+/ แถบ Navigation ด้านบน */
+.navbar {
+background-color: #ffffff;
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 12px 24px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+position: sticky;
+top: 0;
+z-index: 100;
+}
+
+.logo-box {
+cursor: pointer;
+}
+
+.logo-box img {
+height: 45px;
+object-fit: contain;
+/* คำสั่งกลมกลืนสี ช่วยซ่อนพื้นหลังสีขาวของรูปโลโก้ของคุณโดยอัตโนมัติ */
+mix-blend-mode: multiply;
+}
+
+.nav-links {
+display: flex;
+gap: 8px;
+}
+
+.nav-btn {
+background-color: #fce8f3;
+color: #9d3f6d;
+border: 1px solid #f8c8d8;
+padding: 8px 16px;
+border-radius: 20px;
+cursor: pointer;
+font-weight: bold;
+font-size: 14px;
+}
+
+.nav-btn.active, .nav-btn:hover {
+background-color: #f08bb1;
+color: #ffffff;
+border-color: #f08bb1;
+}
+
+/* STREAMING_CHUNK:Styling Layout & Content Sections... /
+/ กรอบเนื้อหาหลัก */
+main {
+max-width: 900px;
+margin: 30px auto;
+padding: 0 16px;
+}
+
+.section-title {
+text-align: center;
+color: #8a3359;
+margin-bottom: 24px;
+}
+
+/* ป้าย Hero ในหน้า Home */
+.hero-banner {
+background-color: #ffffff;
+padding: 35px 20px;
+text-align: center;
+border-radius: 16px;
+box-shadow: 0 4px 15px rgba(248, 168, 196, 0.2);
+margin-bottom: 24px;
+}
+
+.hero-banner h1 {
+color: #8a3359;
+margin-bottom: 10px;
+}
+
+.hero-banner p {
+color: #885876;
+}
+
+/* การ์ดเมนูในหน้า Home */
+.card-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 16px;
+}
+
+.menu-card {
+background-color: #ffffff;
+padding: 24px;
+text-align: center;
+border-radius: 16px;
+border: 1px solid #fae1ed;
+cursor: pointer;
+box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+}
+
+.menu-card:hover {
+background-color: #fff9fc;
+border-color: #f08bb1;
+}
+
+.menu-card h3 {
+color: #8a3359;
+margin-bottom: 6px;
+}
+
+.menu-card p {
+font-size: 13px;
+color: #777;
+}
+
+/* STREAMING_CHUNK:Styling Drone Config Cards... /
+/ การ์ดโดรนในหน้า View Config */
+.drone-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+}
+
+.drone-card {
+background-color: #ffffff;
+border-radius: 16px;
+padding: 16px;
+border: 1px solid #f8c8d8;
+box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.drone-card img {
+width: 100%;
+height: 150px;
+object-fit: cover;
+border-radius: 10px;
+margin-bottom: 12px;
+}
+
+.drone-info {
+font-size: 14px;
+line-height: 1.8;
+}
+
+.drone-info-row {
+display: flex;
+justify-content: space-between;
+border-bottom: 1px solid #f2e1eb;
+padding: 4px 0;
+}
+
+.status-badge {
+background-color: #e2f7e2;
+color: #2e7d32;
+padding: 2px 8px;
+border-radius: 10px;
+font-size: 12px;
+font-weight: bold;
+}
+
+/* STREAMING_CHUNK:Styling Form & Table Elements... /
+/ สไตล์ฟอร์มหน้า Record Temp */
+.form-card {
+background-color: #ffffff;
+max-width: 420px;
+margin: 0 auto;
+padding: 30px;
+border-radius: 20px;
+text-align: center;
+border: 1px solid #f8c8d8;
+box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+}
+
+.form-card h2 {
+color: #8a3359;
+margin-bottom: 8px;
+}
+
+.form-card p {
+font-size: 13px;
+color: #777;
+margin-bottom: 20px;
+}
+
+.input-group {
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 20px;
+position: relative;
+}
+
+.input-group input {
+width: 100%;
+padding: 12px 40px 12px 16px;
+font-size: 20px;
+text-align: center;
+border: 2px solid #f8c8d8;
+border-radius: 12px;
+outline: none;
+}
+
+.input-group input:focus {
+border-color: #f08bb1;
+}
+
+.input-group .unit {
+position: absolute;
+right: 20px;
+font-size: 18px;
+font-weight: bold;
+color: #f08bb1;
+}
+
+.submit-btn {
+width: 100%;
+background-color: #f08bb1;
+color: white;
+padding: 12px;
+border: none;
+border-radius: 12px;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+}
+
+.submit-btn:hover {
+background-color: #e2719b;
+}
+
+.success-msg {
+margin-top: 15px;
+background-color: #e8f5e9;
+color: #2e7d32;
+padding: 10px;
+border-radius: 8px;
+font-size: 14px;
+font-weight: bold;
+}
+
+/* สไตล์ตารางในหน้า View Logs */
+.table-card {
+background-color: #ffffff;
+padding: 24px;
+border-radius: 16px;
+border: 1px solid #f8c8d8;
+}
+
+.table-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 16px;
+}
+
+.table-header h2 {
+color: #8a3359;
+}
+
+.refresh-btn {
+background-color: #ffffff;
+color: #8a3359;
+border: 1px solid #f8c8d8;
+padding: 6px 14px;
+border-radius: 16px;
+cursor: pointer;
+font-weight: bold;
+}
+
+.refresh-btn:hover {
+background-color: #fce8f3;
+}
+
+.table-wrapper {
+overflow-x: auto;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+text-align: left;
+font-size: 14px;
+}
+
+th {
+background-color: #fce8f3;
+color: #8a3359;
+padding: 10px;
+}
+
+td {
+padding: 12px 10px;
+border-bottom: 1px solid #f2e1eb;
+}
+
+tr:hover {
+background-color: #fff9fc;
+}
