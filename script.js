@@ -37,8 +37,22 @@ let logsData = [
     { created: new Date(Date.now() - 7200000).toLocaleString('en-GB'), country: "Wonderland", drone_id: "FAIRY-001", drone_name: "Aurora Prime", celsius: 22.1 }
 ];
 
+// ฟังก์ชันเปิด/ปิด Hamburger Menu บนมือถือ
+function toggleMenu() {
+    const navLinks = document.getElementById('nav-links');
+    if (navLinks) {
+        navLinks.classList.toggle('mobile-open');
+    }
+}
+
 // ฟังก์ชันสลับการแสดงผลหน้าต่างๆ (Tab Navigation)
 function showTab(tabName) {
+    // ปิดเมนูดร็อปดาวน์บนมือถืออัตโนมัติเมื่อผู้ใช้เลือกหน้าแล้ว
+    const navLinks = document.getElementById('nav-links');
+    if (navLinks && navLinks.classList.contains('mobile-open')) {
+        navLinks.classList.remove('mobile-open');
+    }
+
     // ซ่อนทุก Section
     const sections = document.querySelectorAll('.tab-content');
     sections.forEach(sec => sec.classList.add('hidden'));
@@ -53,7 +67,7 @@ function showTab(tabName) {
         targetSection.classList.remove('hidden');
     }
 
-    // ใส่สถานะ Active ให้ปุ่มเมนูที่เลือก
+    // ใส่สถานะ Active ให้ปุ่มเมนูที่เลือก (ถ้ามี)
     const targetButton = document.getElementById('btn-' + tabName);
     if (targetButton) {
         targetButton.classList.add('active');

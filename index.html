@@ -12,11 +12,19 @@
     <!-- แถบเมนูด้านบน (Navigation Bar) -->
     <header class="navbar">
         <div class="logo-box" onclick="showTab('home')">
-            <!-- ใส่รูปโลโก้ของคุณที่นี่ (ระบบ CSS จะช่วยลบพื้นหลังขาวให้อัตโนมัติ) -->
-            <img id="logo-image" src="LogoFairyDrone-removebg-preview.png" alt="Fairy Logo" onerror="this.src="\\AssignmentWebApp\\LogoFairyDrone.jpg">
+            <!-- ปรับแก้ไขเครื่องหมายอัญประกาศซ้ำใน onerror ให้ใช้งานได้ถูกต้อง -->
+            <img id="logo-image" src="LogoFairyDrone-removebg-preview.png" alt="Fairy Logo" onerror="this.src='\\AssignmentWebApp\\LogoFairyDrone.jpg'">
         </div>
-        <nav class="nav-links">
-            <button onclick="showTab('home')" id="btn-home" class="nav-btn active">Home</button>
+
+        <!-- ปุ่ม Hamburger Menu สำหรับหน้าจอมือถือ -->
+        <button class="hamburger" id="hamburger-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav class="nav-links" id="nav-links">
+            <!-- ลบปุ่ม Home ออกแล้ว กดที่โลโก้เพื่อกลับหน้า Home แทน -->
             <button onclick="showTab('config')" id="btn-config" class="nav-btn">View Config</button>
             <button onclick="showTab('log-form')" id="btn-log-form" class="nav-btn">Record Temp</button>
             <button onclick="showTab('logs')" id="btn-logs" class="nav-btn">View Logs</button>
@@ -29,8 +37,17 @@
         <!-- ส่วนที่ 1: หน้าหลัก (HOME PAGE) -->
         <section id="sec-home" class="tab-content">
             <div class="hero-banner">
-                <h1>Welcome to Fairy Kingdom</h1>
-                <p>Manage your drone fleet, track temperatures, and view logs.</p>
+                <!-- ใส่วิดีโอโดรนพื้นหลัง -->
+                <video class="hero-video" autoplay loop muted playsinline>
+                    <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beautiful-forest-and-lake-4122-large.mp4" type="video/mp4">
+                </video>
+                <!-- แผ่นกรองสีทับวิดีโอให้ตัวหนังสือเด่นขึ้น -->
+                <div class="hero-overlay"></div>
+                <!-- ข้อความ -->
+                <div class="hero-content">
+                    <h1>Welcome to Fairy Kingdom</h1>
+                    <p>Manage your drone fleet, track temperatures, and view logs.</p>
+                </div>
             </div>
 
             <div class="card-grid">

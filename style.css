@@ -9,7 +9,10 @@ font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-background-color: #fdf4f9;
+/* พื้นหลังหลักไล่สีชมพูพาสเทล */
+background: linear-gradient(135deg, #fdf4f9 0%, #fbe3ef 50%, #f8d3e3 100%);
+background-attachment: fixed;
+min-height: 100vh;
 color: #5a324d;
 padding-bottom: 40px;
 }
@@ -19,34 +22,60 @@ padding-bottom: 40px;
 display: none !important;
 }
 
-/* STREAMING_CHUNK:Styling Navigation Bar... /
+/* STREAMING_CHUNK:Styling Navigation Bar & Logo... /
 / แถบ Navigation ด้านบน */
 .navbar {
-background-color: #ffffff;
+background: rgba(255, 255, 255, 0.85);
+backdrop-filter: blur(12px);
+-webkit-backdrop-filter: blur(12px);
 display: flex;
 justify-content: space-between;
 align-items: center;
 padding: 12px 24px;
-box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+box-shadow: 0 4px 20px rgba(186, 92, 138, 0.12);
 position: sticky;
 top: 0;
 z-index: 100;
+border-bottom: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .logo-box {
 cursor: pointer;
+display: flex;
+align-items: center;
 }
 
 .logo-box img {
-height: 45px;
+height: 45px; /* ความสูงเท่านี้นะครับ จะได้ไม่ดึงแถบขาวให้ใหญ่ตาม /
+transform: scale(2.5); / ซูมให้ใหญ่ทะลุขอบ 2.5 เท่า /
+transform-origin: left center; / ยึดแกนซ้ายไว้ จะได้ไม่บังเมนู /
 object-fit: contain;
-/* คำสั่งกลมกลืนสี ช่วยซ่อนพื้นหลังสีขาวของรูปโลโก้ของคุณโดยอัตโนมัติ */
-mix-blend-mode: multiply;
+mix-blend-mode: multiply; / ซ่อนพื้นหลังสีขาวของรูปโลโก้ */
+}
+
+/* ปุ่ม Hamburger สำหรับมือถือ (ซ่อนไว้ก่อนบนจอคอม) */
+.hamburger {
+display: none;
+flex-direction: column;
+gap: 5px;
+background: none;
+border: none;
+cursor: pointer;
+z-index: 101;
+}
+
+.hamburger span {
+width: 25px;
+height: 3px;
+background-color: #8a3359;
+border-radius: 5px;
+transition: all 0.3s ease;
 }
 
 .nav-links {
 display: flex;
 gap: 8px;
+transition: all 0.3s ease;
 }
 
 .nav-btn {
@@ -58,15 +87,17 @@ border-radius: 20px;
 cursor: pointer;
 font-weight: bold;
 font-size: 14px;
+transition: all 0.3s ease;
 }
 
 .nav-btn.active, .nav-btn:hover {
-background-color: #f08bb1;
+background: linear-gradient(135deg, #f08bb1 0%, #e2719b 100%);
 color: #ffffff;
 border-color: #f08bb1;
+box-shadow: 0 4px 12px rgba(240, 139, 177, 0.35);
 }
 
-/* STREAMING_CHUNK:Styling Layout & Content Sections... /
+/* STREAMING_CHUNK:Styling Layout & Hero Video Banner... /
 / กรอบเนื้อหาหลัก */
 main {
 max-width: 900px;
@@ -78,28 +109,71 @@ padding: 0 16px;
 text-align: center;
 color: #8a3359;
 margin-bottom: 24px;
+text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
 }
 
-/* ป้าย Hero ในหน้า Home */
+/* ป้าย Hero ในหน้า Home (ใส่วิดีโอ) /
 .hero-banner {
-background-color: #ffffff;
-padding: 35px 20px;
+position: relative;
+height: 350px; / ความสูงของแบนเนอร์ /
+display: flex;
+align-items: center;
+justify-content: center;
 text-align: center;
-border-radius: 16px;
-box-shadow: 0 4px 15px rgba(248, 168, 196, 0.2);
-margin-bottom: 24px;
+border-radius: 24px;
+overflow: hidden; / ป้องกันวิดีโอล้นขอบโค้ง /
+margin-bottom: 30px;
+box-shadow: 0 10px 30px rgba(218, 130, 168, 0.3);
+/ สำคัญ: เอาพื้นหลังสีขาวออก */
+background-color: transparent;
+border: none;
+}
+
+/* ตั้งค่าวิดีโอให้เต็มกรอบ */
+.hero-video {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+object-fit: cover;
+z-index: 1;
+}
+
+/* แผ่นฟิล์มกรองแสงทับวิดีโอ (ดรอปแสงวิดีโอให้ตัวหนังสือชัดขึ้น) */
+.hero-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(135deg, rgba(138, 51, 89, 0.6) 0%, rgba(20, 10, 15, 0.5) 100%);
+z-index: 2;
+}
+
+/* ยกข้อความให้ลอยอยู่บนสุด */
+.hero-content {
+position: relative;
+z-index: 3;
+padding: 20px;
 }
 
 .hero-banner h1 {
-color: #8a3359;
-margin-bottom: 10px;
+color: #ffffff;
+font-size: 2.5rem;
+margin-bottom: 12px;
+text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+letter-spacing: 1px;
 }
 
 .hero-banner p {
-color: #885876;
+color: #fdf4f9;
+font-size: 1.1rem;
+text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
 }
 
-/* การ์ดเมนูในหน้า Home */
+/* STREAMING_CHUNK:Styling Menu Cards... /
+/ การ์ดเมนูในหน้า Home */
 .card-grid {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -107,18 +181,21 @@ gap: 16px;
 }
 
 .menu-card {
-background-color: #ffffff;
+background: linear-gradient(145deg, #ffffff 0%, #fff2f8 100%);
 padding: 24px;
 text-align: center;
-border-radius: 16px;
-border: 1px solid #fae1ed;
+border-radius: 18px;
+border: 1px solid rgba(248, 200, 216, 0.6);
 cursor: pointer;
-box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+box-shadow: 0 4px 15px rgba(218, 130, 168, 0.08);
+transition: all 0.3s ease;
 }
 
 .menu-card:hover {
-background-color: #fff9fc;
+transform: translateY(-3px);
+background: linear-gradient(145deg, #ffffff 0%, #ffeaf4 100%);
 border-color: #f08bb1;
+box-shadow: 0 8px 20px rgba(240, 139, 177, 0.22);
 }
 
 .menu-card h3 {
@@ -140,18 +217,24 @@ gap: 20px;
 }
 
 .drone-card {
-background-color: #ffffff;
-border-radius: 16px;
-padding: 16px;
-border: 1px solid #f8c8d8;
-box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+background: linear-gradient(145deg, #ffffff 0%, #fff5f9 100%);
+border-radius: 20px;
+padding: 18px;
+border: 1px solid rgba(248, 200, 216, 0.7);
+box-shadow: 0 6px 18px rgba(218, 130, 168, 0.1);
+transition: all 0.3s ease;
+}
+
+.drone-card:hover {
+transform: translateY(-2px);
+box-shadow: 0 10px 22px rgba(240, 139, 177, 0.2);
 }
 
 .drone-card img {
 width: 100%;
 height: 150px;
 object-fit: cover;
-border-radius: 10px;
+border-radius: 12px;
 margin-bottom: 12px;
 }
 
@@ -176,17 +259,17 @@ font-size: 12px;
 font-weight: bold;
 }
 
-/* STREAMING_CHUNK:Styling Form & Table Elements... /
+/* STREAMING_CHUNK:Styling Form Elements... /
 / สไตล์ฟอร์มหน้า Record Temp */
 .form-card {
-background-color: #ffffff;
+background: linear-gradient(145deg, #ffffff 0%, #fff2f8 100%);
 max-width: 420px;
 margin: 0 auto;
 padding: 30px;
-border-radius: 20px;
+border-radius: 24px;
 text-align: center;
-border: 1px solid #f8c8d8;
-box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+border: 1px solid rgba(248, 200, 216, 0.8);
+box-shadow: 0 8px 25px rgba(218, 130, 168, 0.12);
 }
 
 .form-card h2 {
@@ -216,10 +299,12 @@ text-align: center;
 border: 2px solid #f8c8d8;
 border-radius: 12px;
 outline: none;
+transition: all 0.3s ease;
 }
 
 .input-group input:focus {
 border-color: #f08bb1;
+box-shadow: 0 0 8px rgba(240, 139, 177, 0.3);
 }
 
 .input-group .unit {
@@ -232,7 +317,7 @@ color: #f08bb1;
 
 .submit-btn {
 width: 100%;
-background-color: #f08bb1;
+background: linear-gradient(135deg, #f08bb1 0%, #e2719b 100%);
 color: white;
 padding: 12px;
 border: none;
@@ -240,10 +325,13 @@ border-radius: 12px;
 font-size: 16px;
 font-weight: bold;
 cursor: pointer;
+box-shadow: 0 4px 15px rgba(240, 139, 177, 0.3);
+transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
-background-color: #e2719b;
+background: linear-gradient(135deg, #e2719b 0%, #d05884 100%);
+box-shadow: 0 6px 18px rgba(226, 113, 155, 0.4);
 }
 
 .success-msg {
@@ -256,12 +344,14 @@ font-size: 14px;
 font-weight: bold;
 }
 
-/* สไตล์ตารางในหน้า View Logs */
+/* STREAMING_CHUNK:Styling Table Logs... /
+/ สไตล์ตารางในหน้า View Logs */
 .table-card {
-background-color: #ffffff;
+background: linear-gradient(145deg, #ffffff 0%, #fff5f9 100%);
 padding: 24px;
-border-radius: 16px;
-border: 1px solid #f8c8d8;
+border-radius: 20px;
+border: 1px solid rgba(248, 200, 216, 0.8);
+box-shadow: 0 8px 25px rgba(218, 130, 168, 0.1);
 }
 
 .table-header {
@@ -283,6 +373,7 @@ padding: 6px 14px;
 border-radius: 16px;
 cursor: pointer;
 font-weight: bold;
+transition: all 0.3s ease;
 }
 
 .refresh-btn:hover {
@@ -304,6 +395,7 @@ th {
 background-color: #fce8f3;
 color: #8a3359;
 padding: 10px;
+white-space: nowrap;
 }
 
 td {
@@ -313,4 +405,55 @@ border-bottom: 1px solid #f2e1eb;
 
 tr:hover {
 background-color: #fff9fc;
+}
+
+/* STREAMING_CHUNK:Adding Responsive Design (Mobile)... /
+/ =========================================
+Responsive Design สำหรับหน้าจอมือถือ/แท็บเล็ต
+========================================= /
+@media (max-width: 768px) {
+.hamburger {
+display: flex; / แสดงปุ่ม 3 ขีดบนมือถือ */
+}
+
+.nav-links {
+    /* ซ่อนเมนูไว้ด้านบนก่อน แล้วใช้ Clip-path ในการทำ Animation สไลด์ลงมา */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    padding: 20px;
+    gap: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* ซ่อน */
+    transition: clip-path 0.4s ease-in-out;
+}
+
+.nav-links.mobile-open {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* แสดง */
+}
+
+.logo-box img {
+    transform: scale(2); /* ลดขนาดโลโก้ลงมาหน่อยเมื่ออยู่บนจอมือถือ */
+}
+
+.nav-btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.hero-banner {
+    height: 250px; /* ลดความสูงวิดีโอบนมือถือ */
+}
+
+.hero-banner h1 {
+    font-size: 1.8rem;
+}
+
+
 }
