@@ -1,459 +1,747 @@
-/* STREAMING_CHUNK:Setting up Global Styles... /
-/ รีเซ็ทค่าเริ่มต้นของเบราว์เซอร์ */
+:root {
+    --ink: #2a1f3d;
+    --gold: #ffd166;
+    --grass: #7bd34a;
+    --panel: #fff8e8
+}
 
-{
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-family: Arial, Helvetica, sans-serif;
+* {
+    box-sizing: border-box
 }
 
 body {
-/* พื้นหลังหลักไล่สีชมพูพาสเทล */
-background: linear-gradient(135deg, #fdf4f9 0%, #fbe3ef 50%, #f8d3e3 100%);
-background-attachment: fixed;
-min-height: 100vh;
-color: #5a324d;
-padding-bottom: 40px;
+    font-family: 'Pixelify Sans', 'BR PhuengTuen', sans-serif;
+    background: #1c1233;
+    color: var(--ink);
+    overflow-x: hidden;
+    margin: 0
 }
 
-/* คลาสสำหรับซ่อนองค์ประกอบที่ไม่ต้องการแสดง */
-.hidden {
-display: none !important;
+.px {
+    font-family: 'Pixelify Sans', 'BR PhuengTuen', sans-serif
 }
 
-/* STREAMING_CHUNK:Styling Navigation Bar & Logo... /
-/ แถบ Navigation ด้านบน */
-.navbar {
-background: rgba(255, 255, 255, 0.85);
-backdrop-filter: blur(12px);
--webkit-backdrop-filter: blur(12px);
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 12px 24px;
-box-shadow: 0 4px 20px rgba(186, 92, 138, 0.12);
-position: sticky;
-top: 0;
-z-index: 100;
-border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+.title {
+    color: #fff;
+    text-shadow: 5px 5px 0 var(--ink)
 }
 
-.logo-box {
-cursor: pointer;
-display: flex;
-align-items: center;
+.shadow-t {
+    text-shadow: 2px 2px 0 var(--ink)
 }
 
-.logo-box img {
-height: 45px; /* ความสูงเท่านี้นะครับ จะได้ไม่ดึงแถบขาวให้ใหญ่ตาม /
-transform: scale(2.5); / ซูมให้ใหญ่ทะลุขอบ 2.5 เท่า /
-transform-origin: left center; / ยึดแกนซ้ายไว้ จะได้ไม่บังเมนู /
-object-fit: contain;
-mix-blend-mode: multiply; / ซ่อนพื้นหลังสีขาวของรูปโลโก้ */
+@font-face {
+    font-family: 'BR PhuengTuen';
+    src: url('/BRPhuengTuendemo.ttf')format('truetype');
+    unicode-range: U+0E00-0E7F;
 }
 
-/* ปุ่ม Hamburger สำหรับมือถือ (ซ่อนไว้ก่อนบนจอคอม) */
-.hamburger {
-display: none;
-flex-direction: column;
-gap: 5px;
-background: none;
-border: none;
-cursor: pointer;
-z-index: 101;
+#sky {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(#3b2a78 0%, #c4528f 38%, #ff9e5e 62%, #ffd9a0 78%)
 }
 
-.hamburger span {
-width: 25px;
-height: 3px;
-background-color: #8a3359;
-border-radius: 5px;
-transition: all 0.3s ease;
+.sun {
+    position: absolute;
+    left: 74%;
+    top: 46%;
+    width: 90px;
+    height: 90px;
+    background: #fff3b0;
+    box-shadow: 0 0 0 14px #fff3b044, 0 0 120px 60px #ffb35c88
 }
 
-.nav-links {
-display: flex;
-gap: 8px;
-transition: all 0.3s ease;
+.layer {
+    position: absolute;
+    left: -5%;
+    width: 110%;
+    bottom: 0;
+    transition: transform .15s linear
 }
 
-.nav-btn {
-background-color: #fce8f3;
-color: #9d3f6d;
-border: 1px solid #f8c8d8;
-padding: 8px 16px;
-border-radius: 20px;
-cursor: pointer;
-font-weight: bold;
-font-size: 14px;
-transition: all 0.3s ease;
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    opacity: .8
 }
 
-.nav-btn.active, .nav-btn:hover {
-background: linear-gradient(135deg, #f08bb1 0%, #e2719b 100%);
-color: #ffffff;
-border-color: #f08bb1;
-box-shadow: 0 4px 12px rgba(240, 139, 177, 0.35);
+.mote {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #ffe28a;
+    box-shadow: 0 0 10px 3px #ffc85b;
+    animation: rise linear infinite
 }
 
-/* STREAMING_CHUNK:Styling Layout & Hero Video Banner... /
-/ กรอบเนื้อหาหลัก */
-main {
-max-width: 900px;
-margin: 30px auto;
-padding: 0 16px;
+@keyframes rise {
+    from {
+        transform: translateY(0)
+    }
+
+    to {
+        transform: translateY(-110vh)
+    }
 }
 
-.section-title {
-text-align: center;
-color: #8a3359;
-margin-bottom: 24px;
-text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+/* blocks & buttons */
+.block {
+    background: var(--panel);
+    border: 4px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink), inset -4px -4px 0 #e7d6ad, inset 4px 4px 0 #fff
 }
 
-/* ป้าย Hero ในหน้า Home (ใส่วิดีโอ) /
-.hero-banner {
-position: relative;
-height: 350px; / ความสูงของแบนเนอร์ /
-display: flex;
-align-items: center;
-justify-content: center;
-text-align: center;
-border-radius: 24px;
-overflow: hidden; / ป้องกันวิดีโอล้นขอบโค้ง /
-margin-bottom: 30px;
-box-shadow: 0 10px 30px rgba(218, 130, 168, 0.3);
-/ สำคัญ: เอาพื้นหลังสีขาวออก */
-background-color: transparent;
-border: none;
+.btn {
+    font-family: inherit;
+    font-size: 1rem;
+    background: var(--grass);
+    border: 4px solid var(--ink);
+    box-shadow: inset -4px -4px 0 #4e9a2a, inset 4px 4px 0 #a6ec7c;
+    padding: .6rem 1.4rem;
+    color: var(--ink);
+    font-weight: 500;
+    cursor: pointer
 }
 
-/* ตั้งค่าวิดีโอให้เต็มกรอบ */
-.hero-video {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-object-fit: cover;
-z-index: 1;
+.btn:hover {
+    filter: brightness(1.08)
 }
 
-/* แผ่นฟิล์มกรองแสงทับวิดีโอ (ดรอปแสงวิดีโอให้ตัวหนังสือชัดขึ้น) */
-.hero-overlay {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: linear-gradient(135deg, rgba(138, 51, 89, 0.6) 0%, rgba(20, 10, 15, 0.5) 100%);
-z-index: 2;
+.btn:active {
+    transform: translate(3px, 3px)
 }
 
-/* ยกข้อความให้ลอยอยู่บนสุด */
-.hero-content {
-position: relative;
-z-index: 3;
-padding: 20px;
+.btn:disabled {
+    opacity: .6
 }
 
-.hero-banner h1 {
-color: #ffffff;
-font-size: 2.5rem;
-margin-bottom: 12px;
-text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-letter-spacing: 1px;
+.btn.alt {
+    background: var(--gold);
+    box-shadow: inset -4px -4px 0 #d9a63a, inset 4px 4px 0 #ffe9a8
 }
 
-.hero-banner p {
-color: #fdf4f9;
-font-size: 1.1rem;
-text-shadow: 0 1px 5px rgba(0, 0, 0, 0.6);
+:is(.btn, .nav a, .logo, #burger, input):focus-visible {
+    outline: 4px solid var(--gold);
+    outline-offset: 2px
 }
 
-/* STREAMING_CHUNK:Styling Menu Cards... /
-/ การ์ดเมนูในหน้า Home */
-.card-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-gap: 16px;
+.field {
+    border: 4px solid var(--ink);
+    background: #fff;
+    font-family: inherit
 }
 
-.menu-card {
-background: linear-gradient(145deg, #ffffff 0%, #fff2f8 100%);
-padding: 24px;
-text-align: center;
-border-radius: 18px;
-border: 1px solid rgba(248, 200, 216, 0.6);
-cursor: pointer;
-box-shadow: 0 4px 15px rgba(218, 130, 168, 0.08);
-transition: all 0.3s ease;
+/* header */
+#top {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .5rem;
+    padding: max(.75rem, env(safe-area-inset-top)) 1.25rem .75rem;
+    background: linear-gradient(#1c1233e6, #1c123300)
 }
 
-.menu-card:hover {
-transform: translateY(-3px);
-background: linear-gradient(145deg, #ffffff 0%, #ffeaf4 100%);
-border-color: #f08bb1;
-box-shadow: 0 8px 20px rgba(240, 139, 177, 0.22);
+.logo {
+    font-size: 2rem;
+    color: #fff;
+    text-decoration: none;
+    text-shadow: 3px 3px 0 var(--ink);
+    cursor: pointer
 }
 
-.menu-card h3 {
-color: #8a3359;
-margin-bottom: 6px;
+.logo span {
+    color: var(--gold)
 }
 
-.menu-card p {
-font-size: 13px;
-color: #777;
+.nav {
+    display: flex;
+    gap: .25rem;
+    font-size: 1.1rem
 }
 
-/* STREAMING_CHUNK:Styling Drone Config Cards... /
-/ การ์ดโดรนในหน้า View Config */
-.drone-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-gap: 20px;
+.nav a {
+    color: #fff;
+    padding: .4rem .9rem;
+    border: 3px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    text-shadow: 2px 2px 0 var(--ink)
 }
 
-.drone-card {
-background: linear-gradient(145deg, #ffffff 0%, #fff5f9 100%);
-border-radius: 20px;
-padding: 18px;
-border: 1px solid rgba(248, 200, 216, 0.7);
-box-shadow: 0 6px 18px rgba(218, 130, 168, 0.1);
-transition: all 0.3s ease;
+.nav a.on {
+    border-color: var(--gold);
+    background: #2a1f3d99;
+    color: var(--gold)
 }
 
-.drone-card:hover {
-transform: translateY(-2px);
-box-shadow: 0 10px 22px rgba(240, 139, 177, 0.2);
+#burger {
+    display: none;
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--ink);
+    background: var(--gold);
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    box-shadow: 3px 3px 0 var(--ink)
 }
 
-.drone-card img {
-width: 100%;
-height: 150px;
-object-fit: cover;
-border-radius: 12px;
-margin-bottom: 12px;
+#burger i {
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    height: 4px;
+    background: var(--ink);
+    transition: transform .25s, opacity .2s
 }
 
-.drone-info {
-font-size: 14px;
-line-height: 1.8;
+#burger i:nth-child(1) {
+    top: 11px
 }
 
-.drone-info-row {
-display: flex;
-justify-content: space-between;
-border-bottom: 1px solid #f2e1eb;
-padding: 4px 0;
+#burger i:nth-child(2) {
+    top: 20px
 }
 
-.status-badge {
-background-color: #e2f7e2;
-color: #2e7d32;
-padding: 2px 8px;
-border-radius: 10px;
-font-size: 12px;
-font-weight: bold;
+#burger i:nth-child(3) {
+    top: 29px
 }
 
-/* STREAMING_CHUNK:Styling Form Elements... /
-/ สไตล์ฟอร์มหน้า Record Temp */
-.form-card {
-background: linear-gradient(145deg, #ffffff 0%, #fff2f8 100%);
-max-width: 420px;
-margin: 0 auto;
-padding: 30px;
-border-radius: 24px;
-text-align: center;
-border: 1px solid rgba(248, 200, 216, 0.8);
-box-shadow: 0 8px 25px rgba(218, 130, 168, 0.12);
+#burger[aria-expanded=true] i:nth-child(1) {
+    transform: translateY(9px) rotate(45deg)
 }
 
-.form-card h2 {
-color: #8a3359;
-margin-bottom: 8px;
+#burger[aria-expanded=true] i:nth-child(2) {
+    opacity: 0
 }
 
-.form-card p {
-font-size: 13px;
-color: #777;
-margin-bottom: 20px;
+#burger[aria-expanded=true] i:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg)
 }
 
-.input-group {
-display: flex;
-align-items: center;
-justify-content: center;
-margin-bottom: 20px;
-position: relative;
+/* pages: slide sideways */
+#pages {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 400vw;
+    transition: transform .8s cubic-bezier(.77, 0, .18, 1)
 }
 
-.input-group input {
-width: 100%;
-padding: 12px 40px 12px 16px;
-font-size: 20px;
-text-align: center;
-border: 2px solid #f8c8d8;
-border-radius: 12px;
-outline: none;
-transition: all 0.3s ease;
+.page {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 7rem 1.25rem 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start
 }
 
-.input-group input:focus {
-border-color: #f08bb1;
-box-shadow: 0 0 8px rgba(240, 139, 177, 0.3);
-}
-
-.input-group .unit {
-position: absolute;
-right: 20px;
-font-size: 18px;
-font-weight: bold;
-color: #f08bb1;
-}
-
-.submit-btn {
-width: 100%;
-background: linear-gradient(135deg, #f08bb1 0%, #e2719b 100%);
-color: white;
-padding: 12px;
-border: none;
-border-radius: 12px;
-font-size: 16px;
-font-weight: bold;
-cursor: pointer;
-box-shadow: 0 4px 15px rgba(240, 139, 177, 0.3);
-transition: all 0.3s ease;
-}
-
-.submit-btn:hover {
-background: linear-gradient(135deg, #e2719b 0%, #d05884 100%);
-box-shadow: 0 6px 18px rgba(226, 113, 155, 0.4);
-}
-
-.success-msg {
-margin-top: 15px;
-background-color: #e8f5e9;
-color: #2e7d32;
-padding: 10px;
-border-radius: 8px;
-font-size: 14px;
-font-weight: bold;
-}
-
-/* STREAMING_CHUNK:Styling Table Logs... /
-/ สไตล์ตารางในหน้า View Logs */
-.table-card {
-background: linear-gradient(145deg, #ffffff 0%, #fff5f9 100%);
-padding: 24px;
-border-radius: 20px;
-border: 1px solid rgba(248, 200, 216, 0.8);
-box-shadow: 0 8px 25px rgba(218, 130, 168, 0.1);
-}
-
-.table-header {
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-bottom: 16px;
-}
-
-.table-header h2 {
-color: #8a3359;
-}
-
-.refresh-btn {
-background-color: #ffffff;
-color: #8a3359;
-border: 1px solid #f8c8d8;
-padding: 6px 14px;
-border-radius: 16px;
-cursor: pointer;
-font-weight: bold;
-transition: all 0.3s ease;
-}
-
-.refresh-btn:hover {
-background-color: #fce8f3;
-}
-
-.table-wrapper {
-overflow-x: auto;
+/* table */
+.tablewrap {
+    border: 4px solid var(--ink)
 }
 
 table {
-width: 100%;
-border-collapse: collapse;
-text-align: left;
-font-size: 14px;
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px
 }
 
 th {
-background-color: #fce8f3;
-color: #8a3359;
-padding: 10px;
-white-space: nowrap;
+    background: var(--ink);
+    color: var(--gold);
+    text-align: left;
+    padding: .7rem
 }
 
 td {
-padding: 12px 10px;
-border-bottom: 1px solid #f2e1eb;
+    padding: .65rem .7rem
 }
 
-tr:hover {
-background-color: #fff9fc;
+tbody tr:nth-child(odd) {
+    background: #fff
 }
 
-/* STREAMING_CHUNK:Adding Responsive Design (Mobile)... /
-/ =========================================
-Responsive Design สำหรับหน้าจอมือถือ/แท็บเล็ต
-========================================= /
-@media (max-width: 768px) {
-.hamburger {
-display: flex; / แสดงปุ่ม 3 ขีดบนมือถือ */
+tbody tr:nth-child(even) {
+    background: #f3e6c4
 }
 
-.nav-links {
-    /* ซ่อนเมนูไว้ด้านบนก่อน แล้วใช้ Clip-path ในการทำ Animation สไลด์ลงมา */
+.led {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 3px solid var(--ink)
+}
+
+.toast {
+    position: fixed;
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    z-index: 50;
+    padding: .8rem 1.2rem
+}
+
+/* responsive: hamburger under 900px */
+@media (max-width:900px) {
+    #burger {
+        display: block
+    }
+
+    .nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(82vw, 320px);
+        height: 100vh;
+        flex-direction: column;
+        gap: .5rem;
+        padding: calc(5.5rem + env(safe-area-inset-top)) 1.25rem 1.5rem;
+        background: #2a1f3df2;
+        border-left: 4px solid var(--gold);
+        transform: translateX(105%);
+        transition: transform .3s;
+        z-index: -1;
+        font-size: 1.3rem
+    }
+
+    .nav.open {
+        transform: none
+    }
+
+    .nav a {
+        padding: .8rem 1rem;
+        border-width: 3px
+    }
+
+    #top {
+        z-index: 40
+    }
+}
+
+@media (max-width:480px) {
+    .sun {
+        width: 60px;
+        height: 60px;
+        left: 60%
+    }
+
+    .logo {
+        font-size: 1.4rem
+    }
+
+    .page {
+        padding-top: 6rem
+    }
+
+    .title {
+        text-shadow: 3px 3px 0 var(--ink)
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    #pages,
+    .nav,
+    #burger i {
+        transition: none
+    }
+
+    .mote {
+        animation: none
+    }
+}
+
+
+#grade {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    background: radial-gradient(circle at 74% 46%, #ffb35cb3 0, #ff8a5c55 28%, #0000 60%), linear-gradient(#0000 55%, #1c123388)
+}
+
+.deco,
+.prop,
+.fly img,
+.cloud {
+    image-rendering: pixelated
+}
+
+/* characters & decorations (desktop only) */
+.page {
+    position: relative;
+    overflow: hidden
+}
+
+.page>div {
+    position: relative;
+    z-index: 1
+}
+
+.deco {
     position: absolute;
-    top: 100%;
-    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    user-select: none;
+    display: none;
+    bottom: 28px
+}
+
+.d-home-drone {
+    bottom: auto;
+    top: 7.5rem;
+    right: 3%;
+    width: 228px;
+    animation: hover 4.5s ease-in-out infinite
+}
+
+.d-cfg-tulip {
+    height: 78px;
+    left: calc(50% + 410px);
+    bottom: 40px
+}
+
+.d-cfg-tulip2 {
+    height: 52px;
+    left: calc(50% + 455px);
+    bottom: 40px
+}
+
+.d-add-bee {
+    bottom: auto;
+    top: 13rem;
+    width: 88px;
+    left: calc(50% + 310px);
+    animation: beefly 7s ease-in-out infinite
+}
+
+.d-add-bee2 {
+    bottom: auto;
+    top: 10rem;
+    width: 62px;
+    left: calc(50% + 420px);
+    animation: beefly 6s ease-in-out -2.5s infinite
+}
+
+.d-logs-drone {
+    bottom: auto;
+    top: 8.5rem;
+    right: 1.5%;
+    width: 228px;
+    animation: hover 4s ease-in-out infinite
+}
+
+@media (min-width:1100px) {
+
+    .d-cfg-tulip,
+    .d-cfg-tulip2,
+    .d-add-bee,
+    .d-add-bee2 {
+        display: block
+    }
+}
+
+@media (min-width:1400px) {
+
+    .d-logs-drone,
+    .d-home-drone {
+        display: block
+    }
+}
+
+@keyframes hover {
+
+    0%,
+    100% {
+        transform: translateY(0)
+    }
+
+    50% {
+        transform: translateY(-12px)
+    }
+}
+
+@keyframes beefly {
+
+    0%,
+    100% {
+        transform: translate(0, 0)
+    }
+
+    25% {
+        transform: translate(26px, -14px)
+    }
+
+    50% {
+        transform: translate(0, -26px)
+    }
+
+    75% {
+        transform: translate(-26px, -12px)
+    }
+}
+
+/* drone list (View Config) & pagination (View Logs) */
+.fleet-card {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    text-align: left;
+    font: inherit;
+    color: var(--ink);
+    background: #fff;
+    border: 4px solid var(--ink);
+    box-shadow: inset -3px -3px 0 #cfc3a6, inset 3px 3px 0 #fff;
+    padding: .6rem .7rem;
+    cursor: pointer
+}
+
+.fleet-card:hover {
+    filter: brightness(1.04)
+}
+
+.fleet-card:focus-visible {
+    outline: 4px solid var(--gold);
+    outline-offset: 2px
+}
+
+.fleet-card.on {
+    background: #fff1c2;
+    box-shadow: inset -3px -3px 0 #d9a63a, inset 3px 3px 0 #ffe9a8, 0 0 0 3px var(--gold)
+}
+
+.fleet-av {
+    flex: none;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    background: var(--grass);
+    border: 3px solid var(--ink);
+    font-family: 'Pixelify Sans', 'BR PhuengTuen', sans-serif;
+    font-size: 1.3rem
+}
+
+.fleet-state {
+    margin-left: auto;
+    font-size: .8rem;
+    white-space: nowrap
+}
+
+.pager {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: .75rem
+}
+
+.pager-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    align-items: center
+}
+
+.btn.chip:disabled {
+    opacity: .45;
+    cursor: default
+}
+
+/* temperature form */
+.drone-select {
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    flex-direction: column;
-    padding: 20px;
-    gap: 15px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); /* ซ่อน */
-    transition: clip-path 0.4s ease-in-out;
+    padding: .55rem .7rem;
+    font: inherit;
+    font-size: 1.05rem;
+    background: #fff;
+    color: var(--ink);
+    border: 4px solid var(--ink);
+    box-shadow: inset 3px 3px 0 #0002;
+    cursor: pointer
 }
 
-.nav-links.mobile-open {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); /* แสดง */
+.btn.step {
+    padding: .3rem 1rem;
+    font-size: 1.7rem;
+    line-height: 1
 }
 
-.logo-box img {
-    transform: scale(2); /* ลดขนาดโลโก้ลงมาหน่อยเมื่ออยู่บนจอมือถือ */
-}
-
-.nav-btn {
-    width: 100%;
+.temp-field {
+    font-family: 'Pixelify Sans', 'BR PhuengTuen', sans-serif;
+    font-size: 1.9rem;
     text-align: center;
-    padding: 12px;
-    font-size: 16px;
+    padding: .3rem .5rem;
+    width: 100%;
+    background: var(--ink);
+    color: var(--gold);
+    border: 4px solid var(--ink);
+    box-shadow: inset 3px 3px 0 #000a;
+    -moz-appearance: textfield
 }
 
-.hero-banner {
-    height: 250px; /* ลดความสูงวิดีโอบนมือถือ */
+.temp-field::-webkit-inner-spin-button,
+.temp-field::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0
 }
 
-.hero-banner h1 {
-    font-size: 1.8rem;
+.temp-field::placeholder {
+    color: #ffd16655
 }
 
-
+.btn.chip {
+    background: #fff;
+    box-shadow: inset -3px -3px 0 #cfc3a6, inset 3px 3px 0 #fff;
+    border-width: 3px;
+    padding: .3rem .8rem
 }
+
+.btn.chip.on {
+    background: var(--gold);
+    box-shadow: inset -3px -3px 0 #d9a63a, inset 3px 3px 0 #ffe9a8
+}
+
+.gauge-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .4rem;
+    padding-top: .2rem
+}
+
+.gauge {
+    position: relative;
+    width: 36px;
+    height: 156px;
+    border: 4px solid var(--ink);
+    background: var(--ink);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden
+}
+
+.gauge i {
+    display: block;
+    width: 100%;
+    height: 0;
+    background: var(--grass);
+    transition: height .3s steps(10), background .3s
+}
+
+.gauge::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(to top, #0000 0 28px, #ffffff33 28px 30px)
+}
+
+/* world props (fixed backdrop) */
+.ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 44px;
+    background: linear-gradient(#8fdc5a 0 4px, #7bd34a 4px 12px, #4e9a2a 12px 16px, #8a5a36 16px)
+}
+
+.ground::after {
+    content: "";
+    position: absolute;
+    inset: 16px 0 0;
+    opacity: .35;
+    background: repeating-linear-gradient(90deg, #0000 0 28px, #3b2414 28px 32px)
+}
+
+.prop {
+    position: absolute;
+    pointer-events: none;
+    transition: transform .15s linear
+}
+
+.fly {
+    position: absolute;
+    pointer-events: none;
+    animation: fly linear infinite;
+    will-change: transform
+}
+
+.fly img {
+    display: block;
+    animation: bob 1.2s ease-in-out infinite
+}
+
+.cloud {
+    position: absolute;
+    left: 0;
+    pointer-events: none;
+    animation: drift linear infinite
+}
+
+@keyframes fly {
+    from {
+        transform: translateX(112vw)
+    }
+
+    to {
+        transform: translateX(-25vw)
+    }
+}
+
+@keyframes drift {
+    from {
+        transform: translateX(-25vw)
+    }
+
+    to {
+        transform: translateX(112vw)
+    }
+}
+
+@keyframes bob {
+
+    0%,
+    100% {
+        transform: translateY(0)
+    }
+
+    50% {
+        transform: translateY(-8px)
+    }
+}
+
+@media (max-width:900px) {
+    .prop.big {
+        display: none
+    }
+}
+
+@media (prefers-reduced-motion:reduce) {
+
+    .deco,
+    .fly,
+    .fly img,
+    .cloud {
+        animation: none
+    }
+
+    .fly {
+        transform: translateX(70vw)
+    }
+
+    .cloud {
+        transform: translateX(30vw)
+    }
+}
+
+*/

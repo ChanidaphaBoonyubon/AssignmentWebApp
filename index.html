@@ -1,129 +1,166 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="th">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fairy Drone Dashboard</title>
-    <!-- ลิงก์ไปยังไฟล์ CSS สำหรับตกแต่งหน้าเว็บ -->
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>MineDrone</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500&family=Pixelify+Sans:wght@500;700&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+    <!-- Tree art: SEEFRO (fantasy minecraft). Minecraft skins/assets belong to their creators. -->
+    <div id="sky" aria-hidden="true">
+        <div class="sun"></div>
+    </div>
+    <div id="grade" aria-hidden="true"></div>
 
-    <!-- แถบเมนูด้านบน (Navigation Bar) -->
-    <header class="navbar">
-        <div class="logo-box" onclick="showTab('home')">
-            <!-- ปรับแก้ไขเครื่องหมายอัญประกาศซ้ำใน onerror ให้ใช้งานได้ถูกต้อง -->
-            <img id="logo-image" src="LogoFairyDrone-removebg-preview.png" alt="Fairy Logo" onerror="this.src='\\AssignmentWebApp\\LogoFairyDrone.jpg'">
-        </div>
-
-        <!-- ปุ่ม Hamburger Menu สำหรับหน้าจอมือถือ -->
-        <button class="hamburger" id="hamburger-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-
-        <nav class="nav-links" id="nav-links">
-            <!-- ลบปุ่ม Home ออกแล้ว กดที่โลโก้เพื่อกลับหน้า Home แทน -->
-            <button onclick="showTab('config')" id="btn-config" class="nav-btn">View Config</button>
-            <button onclick="showTab('log-form')" id="btn-log-form" class="nav-btn">Record Temp</button>
-            <button onclick="showTab('logs')" id="btn-logs" class="nav-btn">View Logs</button>
+    <header id="top">
+        <a href="#home" class="logo px" data-go="0" aria-label="MineDrone กลับหน้า Home">MINE<span>DRONE</span></a>
+        <button id="burger" aria-label="เปิดเมนู" aria-expanded="false"
+            aria-controls="menu"><i></i><i></i><i></i></button>
+        <nav id="menu" class="nav px" aria-label="เมนูหลัก">
+            <a href="#home" data-go="0">Home</a>
+            <a href="#config" data-go="1">View Config</a>
+            <a href="#add" data-go="2">Add Temperature Log</a>
+            <a href="#logs" data-go="3">View Logs</a>
         </nav>
     </header>
 
-    <!-- พื้นที่แสดงเนื้อหาหลัก -->
-    <main>
-        
-        <!-- ส่วนที่ 1: หน้าหลัก (HOME PAGE) -->
-        <section id="sec-home" class="tab-content">
-            <div class="hero-banner">
-                <!-- ใส่วิดีโอโดรนพื้นหลัง -->
-                <video class="hero-video" autoplay loop muted playsinline>
-                    <source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beautiful-forest-and-lake-4122-large.mp4" type="video/mp4">
-                </video>
-                <!-- แผ่นกรองสีทับวิดีโอให้ตัวหนังสือเด่นขึ้น -->
-                <div class="hero-overlay"></div>
-                <!-- ข้อความ -->
-                <div class="hero-content">
-                    <h1>Welcome to Fairy Kingdom</h1>
-                    <p>Manage your drone fleet, track temperatures, and view logs.</p>
-                </div>
-            </div>
-
-            <div class="card-grid">
-                <div class="menu-card" onclick="showTab('config')">
-                    <h3>Fleet Config</h3>
-                    <p>View drone profiles</p>
-                </div>
-                <div class="menu-card" onclick="showTab('log-form')">
-                    <h3>Record Temp</h3>
-                    <p>Log new temperature data</p>
-                </div>
-                <div class="menu-card" onclick="showTab('logs')">
-                    <h3>System Logs</h3>
-                    <p>Review historical records</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ส่วนที่ 2: หน้าแสดงโปรไฟล์โดรน (VIEW CONFIG PAGE) -->
-        <section id="sec-config" class="tab-content hidden">
-            <h2 class="section-title">Drone Fleet Profiles</h2>
-            <div id="config-container" class="drone-grid">
-                <!-- ข้อมูลการ์ดโดรนจะถูกดึงมาใส่ตรงนี้ด้วย script.js -->
-            </div>
-        </section>
-
-        <!-- ส่วนที่ 3: หน้าฟอร์มบันทึกอุณหภูมิ (RECORD TEMP FORM PAGE) -->
-        <section id="sec-log-form" class="tab-content hidden">
-            <div class="form-card">
-                <h2>Record Temperature</h2>
-                <p>Update temperature status for assigned drone.</p>
-                
-                <form onsubmit="submitTemperature(event)">
-                    <div class="input-group">
-                        <input type="number" step="0.1" id="temp-input" placeholder="e.g. 24.5" required>
-                        <span class="unit">°C</span>
+    <main id="pages">
+        <!-- HOME -->
+        <section class="page" aria-label="Home"><img class="deco d-home-drone" src="images/drone.png" alt=""
+                aria-hidden="true" draggable="false">
+            <div class="max-w-4xl xl:max-w-6xl w-full pt-4 sm:pt-6">
+                <h1 class="px text-3xl sm:text-5xl md:text-7xl xl:text-6xl leading-tight title">ศูนย์ควบคุมโดรน<br
+                        class="xl:hidden"> บันทึกอุณหภูมิ</h1>
+                <p class="text-white text-base sm:text-xl mt-3 sm:mt-4 max-w-xl shadow-t">ดูการตั้งค่าโดรน บันทึกอุณหภูมิ
+                    และย้อนดูประวัติ ได้ในที่เดียว</p>
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-5 mt-6 sm:mt-8">
+                    <div class="block p-4 sm:p-5 flex flex-col">
+                        <div class="px text-xl">1. ดู Config</div>
+                        <p class="mt-1 mb-4">โหลดชื่อ ไฟ และประเทศของโดรนจาก API</p><button
+                            class="btn mt-auto self-start" data-go="1">เปิดหน้า Config</button>
                     </div>
-                    <button type="submit" class="submit-btn">Submit Data</button>
-                </form>
-
-                <div id="success-msg" class="success-msg hidden">
-                    Data logged successfully!
+                    <div class="block p-4 sm:p-5 flex flex-col">
+                        <div class="px text-xl">2. บันทึกอุณหภูมิ</div>
+                        <p class="mt-1 mb-4">กรอกค่าองศาเซลเซียสแล้วส่งเข้าระบบ</p><button
+                            class="btn mt-auto self-start" data-go="2">กรอกอุณหภูมิ</button>
+                    </div>
+                    <div class="block p-4 sm:p-5 flex flex-col sm:col-span-2 md:col-span-1">
+                        <div class="px text-xl">3. ดูประวัติ</div>
+                        <p class="mt-1 mb-4">ตารางรายการบันทึกอุณหภูมิล่าสุดของโดรนนี้</p><button class="btn mt-auto self-start"
+                            data-go="3">ดู Logs</button>
+                    </div>
+                </div>
+                <div class="block p-4 mt-5 sm:mt-6 flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-2 items-center text-sm sm:text-base">
+                    <span class="px text-base sm:text-lg">สถานะตอนนี้</span>
+                    <span>Drone ID: <b id="h-id">-</b></span><span>ชื่อ: <b id="h-name">ยังไม่โหลด</b></span><span>ไฟ:
+                        <b id="h-light">-</b></span><span>จำนวน Logs: <b id="h-count">-</b></span>
+                    <span id="demo" class="hidden px"
+                        style="background:var(--gold);border:3px solid var(--ink);padding:0 .5rem">โหมดสาธิต</span>
                 </div>
             </div>
         </section>
 
-        <!-- ส่วนที่ 4: หน้าแสดงตารางประวัติ (VIEW LOGS PAGE) -->
-        <section id="sec-logs" class="tab-content hidden">
-            <div class="table-card">
-                <div class="table-header">
-                    <h2>System Logs</h2>
-                    <button onclick="loadLogs()" class="refresh-btn">Refresh Data</button>
+        <!-- PAGE 1 -->
+        <section class="page" aria-label="View Config"><img class="deco d-cfg-tulip" src="images/tulip.png" alt=""
+                aria-hidden="true" draggable="false"><img class="deco d-cfg-tulip2" src="images/tulip.png" alt=""
+                aria-hidden="true" draggable="false">
+            <div id="cfg-card" class="block w-full max-w-lg p-4 sm:p-6 mt-2 sm:mt-6">
+                <h2 class="px text-2xl sm:text-3xl">Drone Profile</h2>
+                <div id="cfg-body" class="mt-4 space-y-3">กำลังโหลด...</div>
+                <button id="cfg-reload" class="btn alt mt-5">โหลดใหม่</button>
+                <div id="fleet" class="hidden mt-6 pt-5 border-t-4 border-dashed" style="border-color:#d9c79a">
+                    <h3 class="px text-xl">โดรนทั้งหมด (<span id="fleet-count">0</span>)</h3>
+                    <p class="text-sm opacity-70">กดการ์ดเพื่อเลือกโดรน ใช้กับฟอร์มและตาราง Logs ด้วย</p>
+                    <div id="fleet-grid" class="grid gap-3 mt-3 sm:grid-cols-2 lg:grid-cols-3"></div>
                 </div>
+            </div>
+        </section>
 
-                <div class="table-wrapper">
-                    <table>
+        <!-- PAGE 2 -->
+        <section class="page" aria-label="Add Temperature Log"><img class="deco d-add-bee" src="images/bee.png" alt=""
+                aria-hidden="true" draggable="false"><img class="deco d-add-bee2" src="images/bee.png" alt=""
+                aria-hidden="true" draggable="false">
+            <div class="block w-full max-w-lg p-4 sm:p-6 mt-2 sm:mt-6">
+                <h2 class="px text-2xl sm:text-3xl">Add Temperature Log</h2>
+                <p class="mt-1">ส่งข้อมูลในนาม <b id="f-who">-</b></p>
+                <div id="picker" class="mt-4 hidden"><label for="drone-select"
+                        class="block px text-lg">เลือกโดรน</label><select id="drone-select"
+                        class="drone-select mt-2"></select></div>
+                <div class="mt-5 grid gap-x-4 sm:gap-x-5" style="grid-template-columns:1fr auto">
+                    <div class="min-w-0">
+                        <label for="celsius" class="block px text-base sm:text-lg">Temperature in celsius (°C)</label>
+                        <div class="flex gap-2 mt-2">
+                            <button type="button" id="t-minus" class="btn alt step" aria-label="ลดอุณหภูมิ">−</button>
+                            <input id="celsius" type="number" step="0.1" inputmode="decimal" placeholder="26"
+                                class="temp-field min-w-0 flex-1">
+                            <button type="button" id="t-plus" class="btn alt step" aria-label="เพิ่มอุณหภูมิ">+</button>
+                        </div>
+                        <p class="mt-4 px">เลือกค่าด่วน (°C)</p>
+                        <div id="chips" class="flex flex-wrap gap-2 mt-2"><button type="button" class="btn chip"
+                                data-v="20">20</button><button type="button" class="btn chip"
+                                data-v="25">25</button><button type="button" class="btn chip"
+                                data-v="30">30</button><button type="button" class="btn chip"
+                                data-v="35">35</button><button type="button" class="btn chip" data-v="40">40</button>
+                        </div>
+                    </div>
+                    <div class="gauge-col" aria-hidden="true">
+                        <div class="gauge"><i id="g-fill"></i></div><span id="g-label" class="px">— °C</span>
+                    </div>
+                </div>
+                <p id="f-err" class="mt-3 text-red-700 min-h-[1.5rem]" role="alert"></p>
+                <button id="submit" class="btn mt-1 w-full">Submit data</button>
+            </div>
+        </section>
+
+        <!-- PAGE 3 -->
+        <section class="page" aria-label="View Logs"><img class="deco d-logs-drone" src="images/drone.png" alt=""
+                aria-hidden="true" draggable="false">
+            <div class="block w-full max-w-4xl p-4 sm:p-6 mt-2 sm:mt-6">
+                <div class="logs-head">
+                    <div>
+                        <h2 class="px text-2xl sm:text-3xl">Drone Logs</h2>
+                        <p class="mt-1 text-sm sm:text-base">แสดงเฉพาะโดรน <b id="l-who">-</b></p>
+                    </div>
+                    <div class="logs-actions">
+                        <label class="page-size-wrap" for="page-size">
+                            <span>ต่อหน้า</span>
+                            <select id="page-size" class="page-size-select">
+                                <option value="6" selected>6</option>
+                                <option value="8">8</option>
+                                <option value="12">12</option>
+                            </select>
+                        </label>
+                        <button id="refresh" class="btn alt">Refresh</button>
+                    </div>
+                </div>
+                <div class="mt-4 tablewrap">
+                    <table class="logs-table">
                         <thead>
                             <tr>
-                                <th>Created (Time)</th>
+                                <th>Created</th>
                                 <th>Country</th>
                                 <th>Drone ID</th>
                                 <th>Drone Name</th>
-                                <th>Celsius (°C)</th>
+                                <th class="text-right sm:text-left">Celsius</th>
                             </tr>
                         </thead>
-                        <tbody id="logs-tbody">
-                            <!-- แถวข้อมูลตารางจะถูกดึงมาใส่ตรงนี้ด้วย script.js -->
-                        </tbody>
+                        <tbody id="rows"></tbody>
                     </table>
                 </div>
+                <div id="pager" class="pager mt-4" aria-label="ตัวแบ่งหน้าตาราง Logs"></div>
             </div>
         </section>
-
     </main>
 
-    <!-- ลิงก์ไปยังไฟล์ JavaScript สำหรับทำงานและควบคุมหน้าเว็บ -->
-    <script src="script.js"></script>
+    <div id="toast" class="toast block px hidden" role="status"></div>
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>
