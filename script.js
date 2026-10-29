@@ -3,7 +3,7 @@
 // เปิดในเครื่อง (localhost หรือดับเบิลคลิกไฟล์) จะต่อ server ในเครื่อง ถ้า deploy แล้วจะต่อ Render
 const API_BASE = ['localhost', '127.0.0.1', ''].includes(location.hostname)
     ? 'http://localhost:3000'
-    : 'https://assignmentwebapp.onrender.com';
+    : 'https://assignmentwebapp-dvlr.onrender.com/';
 const DRONE_ID = '67010174';
 const PER = 12;      // รายการต่อหน้า (ตรงกับ server)
 const MAX_C = 80;    // อุณหภูมิสูงสุดที่ส่งได้ (ต่ำสุดคือ 0)
