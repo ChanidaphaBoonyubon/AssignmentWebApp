@@ -57,58 +57,38 @@
                             data-go="3">ดู Logs</button>
                     </div>
                 </div>
-                <div class="block p-4 mt-5 sm:mt-6 flex flex-wrap gap-x-6 sm:gap-x-8 gap-y-2 items-center text-sm sm:text-base">
-                    <span class="px text-base sm:text-lg">สถานะตอนนี้</span>
-                    <span>Drone ID: <b id="h-id">-</b></span><span>ชื่อ: <b id="h-name">ยังไม่โหลด</b></span><span>ไฟ:
-                        <b id="h-light">-</b></span><span>จำนวน Logs: <b id="h-count">-</b></span>
-                    <span id="demo" class="hidden px"
-                        style="background:var(--gold);border:3px solid var(--ink);padding:0 .5rem">โหมดสาธิต</span>
-                </div>
             </div>
         </section>
 
         <!-- PAGE 1 -->
-        <section class="page" aria-label="View Config"><img class="deco d-cfg-tulip" src="images/tulip.png" alt=""
+        <section class="page" aria-label="View Config"><img class="deco d-cfg-bee" src="images/bee.png" alt="" aria-hidden="true" draggable="false"><img class="deco d-cfg-bee2" src="images/bee.png" alt="" aria-hidden="true" draggable="false"><img class="deco d-cfg-tulip" src="images/tulip.png" alt=""
                 aria-hidden="true" draggable="false"><img class="deco d-cfg-tulip2" src="images/tulip.png" alt=""
                 aria-hidden="true" draggable="false">
             <div id="cfg-card" class="block w-full max-w-lg p-4 sm:p-6 mt-2 sm:mt-6">
                 <h2 class="px text-2xl sm:text-3xl">Drone Profile</h2>
                 <div id="cfg-body" class="mt-4 space-y-3">กำลังโหลด...</div>
                 <button id="cfg-reload" class="btn alt mt-5">โหลดใหม่</button>
-                <div id="fleet" class="hidden mt-6 pt-5 border-t-4 border-dashed" style="border-color:#d9c79a">
-                    <h3 class="px text-xl">โดรนทั้งหมด (<span id="fleet-count">0</span>)</h3>
-                    <p class="text-sm opacity-70">กดการ์ดเพื่อเลือกโดรน ใช้กับฟอร์มและตาราง Logs ด้วย</p>
-                    <div id="fleet-grid" class="grid gap-3 mt-3 sm:grid-cols-2 lg:grid-cols-3"></div>
-                </div>
+                
             </div>
         </section>
 
         <!-- PAGE 2 -->
-        <section class="page" aria-label="Add Temperature Log"><img class="deco d-add-bee" src="images/bee.png" alt=""
-                aria-hidden="true" draggable="false"><img class="deco d-add-bee2" src="images/bee.png" alt=""
-                aria-hidden="true" draggable="false">
+        <section class="page" aria-label="Add Temperature Log"><img class="deco d-add-bee" src="images/bee.png" alt="" aria-hidden="true" draggable="false"><img class="deco d-add-bee2" src="images/bee.png" alt="" aria-hidden="true" draggable="false">
             <div class="block w-full max-w-lg p-4 sm:p-6 mt-2 sm:mt-6">
                 <h2 class="px text-2xl sm:text-3xl">Add Temperature Log</h2>
                 <p class="mt-1">ส่งข้อมูลในนาม <b id="f-who">-</b></p>
-                <div id="picker" class="mt-4 hidden"><label for="drone-select"
-                        class="block px text-lg">เลือกโดรน</label><select id="drone-select"
-                        class="drone-select mt-2"></select></div>
+                
                 <div class="mt-5 grid gap-x-4 sm:gap-x-5" style="grid-template-columns:1fr auto">
                     <div class="min-w-0">
                         <label for="celsius" class="block px text-base sm:text-lg">Temperature in celsius (°C)</label>
                         <div class="flex gap-2 mt-2">
                             <button type="button" id="t-minus" class="btn alt step" aria-label="ลดอุณหภูมิ">−</button>
-                            <input id="celsius" type="number" step="0.1" inputmode="decimal" placeholder="26"
+                            <input id="celsius" type="number" step="0.1" min="0" max="80" inputmode="decimal" placeholder="0 - 80"
                                 class="temp-field min-w-0 flex-1">
                             <button type="button" id="t-plus" class="btn alt step" aria-label="เพิ่มอุณหภูมิ">+</button>
                         </div>
                         <p class="mt-4 px">เลือกค่าด่วน (°C)</p>
-                        <div id="chips" class="flex flex-wrap gap-2 mt-2"><button type="button" class="btn chip"
-                                data-v="20">20</button><button type="button" class="btn chip"
-                                data-v="25">25</button><button type="button" class="btn chip"
-                                data-v="30">30</button><button type="button" class="btn chip"
-                                data-v="35">35</button><button type="button" class="btn chip" data-v="40">40</button>
-                        </div>
+                        <div id="chips" class="flex flex-wrap gap-2 mt-2"><button type="button" class="btn chip" data-v="10">10</button><button type="button" class="btn chip" data-v="25">25</button><button type="button" class="btn chip" data-v="40">40</button><button type="button" class="btn chip" data-v="60">60</button><button type="button" class="btn chip" data-v="80">80</button></div>
                     </div>
                     <div class="gauge-col" aria-hidden="true">
                         <div class="gauge"><i id="g-fill"></i></div><span id="g-label" class="px">— °C</span>
@@ -129,14 +109,6 @@
                         <p class="mt-1 text-sm sm:text-base">แสดงเฉพาะโดรน <b id="l-who">-</b></p>
                     </div>
                     <div class="logs-actions">
-                        <label class="page-size-wrap" for="page-size">
-                            <span>ต่อหน้า</span>
-                            <select id="page-size" class="page-size-select">
-                                <option value="6" selected>6</option>
-                                <option value="8">8</option>
-                                <option value="12">12</option>
-                            </select>
-                        </label>
                         <button id="refresh" class="btn alt">Refresh</button>
                     </div>
                 </div>
@@ -160,7 +132,7 @@
     </main>
 
     <div id="toast" class="toast block px hidden" role="status"></div>
-    <script type="module" src="script.js"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>
